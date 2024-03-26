@@ -84,6 +84,20 @@ extern "C" void vPortYield(void)
 }
 
 /**
+ * @file portable.h
+ * @brief Yields to the next task from ISR.
+ */
+extern "C" void vPortYieldFromInterrupt()
+{
+    if( pxProcessor_ != NULLPTR )
+    {
+        api::CpuInterruptController& ic( pxProcessor_->getInterruptController() );
+        int32_t const source( ic.getNumberPendSupervisor() );
+        ic.jump(source);
+    }
+}
+
+/**
  * @file portmacro.h
  * @brief Disable interrupts globaly.
  */

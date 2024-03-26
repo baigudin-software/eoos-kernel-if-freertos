@@ -36,8 +36,10 @@ typedef uint32_t                                TickType_t;
 
 /* Scheduler utilities */
 extern void vPortYield(void);
+extern void vPortYieldFromInterrupt(void);
 
 #define portYIELD()                             vPortYield()
+#define portYIELD_FROM_ISR()                    vPortYieldFromInterrupt()
 
 /* Critical section management
  *
